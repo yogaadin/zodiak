@@ -10,7 +10,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1.5rem;
+    padding: 1rem;
     font-family: 'Inter', sans-serif;
     background: #f2f4f8;
 }
@@ -31,6 +31,7 @@ body {
     --tag-soft: #e2e8f0;
     --shadow-card: 0 20px 35px -12px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0,0,0,0.02);
     --shadow-hover: 0 25px 35px -14px rgba(59,130,246,0.25);
+    --footer-bg: rgba(0, 0, 0, 0.03);
 }
 
 body.dark {
@@ -47,6 +48,7 @@ body.dark {
     --btn-bg: linear-gradient(105deg, #4f46e5, #818cf8);
     --tag-soft: #1e293b;
     --shadow-card: 0 20px 35px -12px rgba(0, 0, 0, 0.5), 0 1px 1px rgba(255,255,255,0.05);
+    --footer-bg: rgba(255, 255, 255, 0.03);
 }
 
 body {
@@ -60,7 +62,7 @@ body {
     background: var(--card-glass);
     backdrop-filter: blur(12px);
     border-radius: 40px;
-    padding: 2rem 2rem 2.5rem;
+    padding: 2rem 2rem 1.5rem;
     border: 1px solid var(--border-light);
     box-shadow: var(--shadow-card);
     position: relative;
@@ -206,7 +208,7 @@ select:focus, input:focus {
     border-radius: 36px;
     padding: 1.5rem;
     border: 1px solid var(--border-light);
-    min-height: 520px;
+    min-height: 480px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -246,11 +248,14 @@ select:focus, input:focus {
     padding: 1rem 1.5rem;
     margin-bottom: 1.5rem;
     border: 1px solid var(--border-light);
+    flex-wrap: wrap;
+    gap: 1rem;
 }
 .zod-info {
     display: flex;
     align-items: center;
     gap: 18px;
+    flex-wrap: wrap;
 }
 .zod-emoji {
     font-size: 3rem;
@@ -354,6 +359,32 @@ select:focus, input:focus {
     padding: 0.9rem 1.2rem;
 }
 
+/* ========== FOOTER WATERMARK ========== */
+.footer-watermark {
+    margin-top: 2rem;
+    padding-top: 1.2rem;
+    text-align: center;
+    border-top: 1px solid var(--border-light);
+    background: var(--footer-bg);
+    border-radius: 24px;
+}
+
+.watermark-main {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+}
+
+.watermark-sub {
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: var(--text-dim);
+    opacity: 0.8;
+}
+
+/* Animations */
 @keyframes softFloat {
     0%, 100% { transform: translateY(0); }
     50% { transform: translateY(-6px); }
@@ -363,11 +394,195 @@ select:focus, input:focus {
     to { opacity: 1; transform: translateY(0); }
 }
 
-@media (max-width: 780px) {
-    .two-col { grid-template-columns: 1fr; gap: 1.8rem; }
-    .zodiac-container { padding: 1.5rem; }
-    .mode-toggle { top: 16px; right: 18px; }
-    .zod-name { font-size: 1.3rem; }
+/* ========== MOBILE FRIENDLY STYLES ========== */
+@media (max-width: 768px) {
+    body {
+        padding: 0.75rem;
+    }
+    
+    .zodiac-container {
+        padding: 1.25rem 1.25rem 1rem;
+        border-radius: 32px;
+    }
+    
+    .mode-toggle {
+        top: 14px;
+        right: 16px;
+        padding: 6px 14px;
+        font-size: 0.7rem;
+    }
+    
+    .two-col {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin-top: 0.8rem;
+    }
+    
+    .brand-wrap h1 {
+        font-size: 1.8rem;
+    }
+    
+    .icon-badge {
+        font-size: 1.6rem;
+    }
+    
+    .tagline {
+        font-size: 0.75rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .input-group {
+        margin: 4px 0;
+    }
+    
+    select, input {
+        padding: 12px 16px;
+        font-size: 0.9rem;
+    }
+    
+    .btn-primary {
+        padding: 12px 12px;
+        font-size: 0.95rem;
+        margin-top: 8px;
+    }
+    
+    .result-stage {
+        padding: 1rem;
+        min-height: 420px;
+    }
+    
+    .placeholder-icon {
+        font-size: 50px;
+    }
+    
+    .placeholder-text {
+        font-size: 0.85rem;
+        padding: 6px 18px;
+    }
+    
+    /* Zodiac card mobile adjustments */
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem;
+    }
+    
+    .zod-info {
+        gap: 12px;
+    }
+    
+    .zod-emoji {
+        width: 55px;
+        height: 55px;
+        font-size: 2.2rem;
+    }
+    
+    .zod-name {
+        font-size: 1.4rem;
+    }
+    
+    .compat-chip {
+        align-self: flex-start;
+    }
+    
+    .grid-stats {
+        gap: 10px;
+        margin: 15px 0;
+    }
+    
+    .stat-item {
+        padding: 10px 12px;
+        gap: 10px;
+    }
+    
+    .stat-icon {
+        font-size: 1.5rem;
+    }
+    
+    .stat-value {
+        font-size: 0.8rem;
+    }
+    
+    .pill {
+        padding: 5px 12px;
+        font-size: 0.7rem;
+    }
+    
+    .desc-block {
+        padding: 0.8rem 1rem;
+    }
+    
+    .desc-text {
+        font-size: 0.8rem;
+    }
+    
+    .career-footer {
+        padding: 0.7rem 1rem;
+    }
+    
+    /* Footer watermark mobile */
+    .footer-watermark {
+        margin-top: 1.5rem;
+        padding-top: 1rem;
+    }
+    
+    .watermark-main {
+        font-size: 0.6rem;
+    }
+    
+    .watermark-sub {
+        font-size: 0.55rem;
+    }
+}
+
+/* Untuk layar sangat kecil (iPhone SE, dll) */
+@media (max-width: 480px) {
+    .zodiac-container {
+        padding: 1rem 1rem 0.8rem;
+    }
+    
+    .brand-wrap h1 {
+        font-size: 1.6rem;
+    }
+    
+    .zod-name {
+        font-size: 1.2rem;
+    }
+    
+    .zod-emoji {
+        width: 48px;
+        height: 48px;
+        font-size: 2rem;
+    }
+    
+    .compat-score {
+        font-size: 1.4rem;
+    }
+    
+    .grid-stats {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+    
+    .result-stage {
+        min-height: 380px;
+    }
+}
+
+/* Untuk tablet kecil (portrait) */
+@media (min-width: 769px) and (max-width: 900px) {
+    .two-col {
+        gap: 1.5rem;
+    }
+    
+    .zod-name {
+        font-size: 1.4rem;
+    }
+    
+    .zod-emoji {
+        width: 60px;
+        height: 60px;
+    }
 }
 
 ::selection {
