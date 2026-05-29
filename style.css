@@ -1,0 +1,591 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    transition: all 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+}
+
+body {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    font-family: 'Inter', sans-serif;
+    background: #f2f4f8;
+}
+
+/* === BASE THEME (NEUTRAL CASUAL, NOT GIRLY) === */
+:root {
+    --bg-soft: #eef2f5;
+    --card-glass: rgba(255, 255, 255, 0.9);
+    --inner-panel: rgba(245, 248, 250, 0.8);
+    --border-light: rgba(0, 0, 0, 0.08);
+    --text-main: #1e2a3a;
+    --text-dim: #546e7a;
+    --text-muted: #78909c;
+    --accent-primary: #3b82f6;
+    --accent-glow: #60a5fa;
+    --accent-secondary: #f59e0b;
+    --btn-bg: linear-gradient(105deg, #2563eb, #3b82f6);
+    --tag-soft: #e2e8f0;
+    --shadow-card: 0 20px 35px -12px rgba(0, 0, 0, 0.1), 0 1px 2px rgba(0,0,0,0.02);
+    --shadow-hover: 0 25px 35px -14px rgba(59,130,246,0.25);
+    --footer-bg: rgba(0, 0, 0, 0.03);
+}
+
+body.dark {
+    --bg-soft: #0f1724;
+    --card-glass: rgba(18, 25, 40, 0.85);
+    --inner-panel: rgba(30, 41, 59, 0.7);
+    --border-light: rgba(71, 85, 105, 0.4);
+    --text-main: #eef2ff;
+    --text-dim: #94a3b8;
+    --text-muted: #64748b;
+    --accent-primary: #818cf8;
+    --accent-glow: #a78bfa;
+    --accent-secondary: #fbbf24;
+    --btn-bg: linear-gradient(105deg, #4f46e5, #818cf8);
+    --tag-soft: #1e293b;
+    --shadow-card: 0 20px 35px -12px rgba(0, 0, 0, 0.5), 0 1px 1px rgba(255,255,255,0.05);
+    --footer-bg: rgba(255, 255, 255, 0.03);
+}
+
+body {
+    background: var(--bg-soft);
+}
+
+/* main container — glassy, clean, fun but mature */
+.zodiac-container {
+    max-width: 1100px;
+    width: 100%;
+    background: var(--card-glass);
+    backdrop-filter: blur(12px);
+    border-radius: 40px;
+    padding: 2rem 2rem 1.5rem;
+    border: 1px solid var(--border-light);
+    box-shadow: var(--shadow-card);
+    position: relative;
+}
+
+/* mode toggle (modern sleek) */
+.mode-toggle {
+    position: absolute;
+    top: 22px;
+    right: 28px;
+    background: var(--inner-panel);
+    backdrop-filter: blur(8px);
+    padding: 8px 18px;
+    border-radius: 200px;
+    font-size: 0.8rem;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    border: 1px solid var(--border-light);
+    color: var(--text-dim);
+    z-index: 10;
+    transition: 0.2s;
+}
+.mode-toggle:hover {
+    background: var(--accent-primary);
+    color: white;
+    border-color: transparent;
+    transform: scale(0.96);
+}
+
+/* 2-column layout */
+.two-col {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 2rem;
+    margin-top: 0.5rem;
+}
+
+/* left panel */
+.input-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.brand-wrap {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 0.2rem;
+}
+.brand-wrap h1 {
+    font-size: 2.2rem;
+    font-weight: 800;
+    background: linear-gradient(125deg, var(--accent-primary), var(--accent-secondary));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    letter-spacing: -0.5px;
+}
+.icon-badge {
+    font-size: 2rem;
+    filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+}
+.tagline {
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: var(--text-dim);
+    background: var(--inner-panel);
+    display: inline-block;
+    padding: 6px 18px;
+    border-radius: 40px;
+    width: fit-content;
+    margin-bottom: 1rem;
+}
+
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 8px 0;
+}
+.input-group label {
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--accent-primary);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+select, input {
+    background: var(--inner-panel);
+    border: 1.5px solid var(--border-light);
+    border-radius: 28px;
+    padding: 14px 20px;
+    font-size: 0.95rem;
+    font-weight: 500;
+    color: var(--text-main);
+    outline: none;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+}
+select:focus, input:focus {
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(59,130,246,0.2);
+    transform: translateY(-1px);
+}
+
+.btn-primary {
+    background: var(--btn-bg);
+    border: none;
+    border-radius: 44px;
+    padding: 14px 12px;
+    font-weight: 700;
+    font-size: 1rem;
+    color: white;
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 6px 12px rgba(59,130,246,0.25);
+}
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-hover);
+    filter: brightness(1.02);
+}
+.btn-primary:active {
+    transform: translateY(2px);
+}
+
+/* right panel — result zone */
+.result-stage {
+    background: var(--inner-panel);
+    border-radius: 36px;
+    padding: 1.5rem;
+    border: 1px solid var(--border-light);
+    min-height: 480px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+}
+
+.placeholder-box {
+    text-align: center;
+}
+.placeholder-icon {
+    font-size: 64px;
+    margin-bottom: 16px;
+    opacity: 0.7;
+    filter: drop-shadow(0 6px 8px rgba(0,0,0,0.05));
+    animation: softFloat 3s infinite ease;
+}
+.placeholder-text {
+    font-weight: 500;
+    color: var(--text-dim);
+    background: var(--card-glass);
+    padding: 8px 24px;
+    border-radius: 40px;
+    display: inline-block;
+}
+
+/* zodiac card (fun & modern, not overly girly) */
+.zod-card {
+    width: 100%;
+    animation: fadeSlide 0.4s ease;
+}
+.card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--card-glass);
+    border-radius: 48px;
+    padding: 1rem 1.5rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid var(--border-light);
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+.zod-info {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+.zod-emoji {
+    font-size: 3rem;
+    background: var(--inner-panel);
+    width: 70px;
+    height: 70px;
+    border-radius: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.zod-name {
+    font-size: 1.7rem;
+    font-weight: 800;
+    color: var(--text-main);
+}
+.zod-date {
+    font-size: 0.7rem;
+    background: var(--tag-soft);
+    padding: 4px 12px;
+    border-radius: 30px;
+    width: fit-content;
+    margin-top: 5px;
+    font-weight: 600;
+    color: var(--text-dim);
+}
+.compat-chip {
+    background: var(--inner-panel);
+    border-radius: 40px;
+    padding: 10px 18px;
+    text-align: center;
+    border: 1px solid var(--border-light);
+}
+.compat-score {
+    font-size: 1.7rem;
+    font-weight: 800;
+    color: var(--accent-secondary);
+    line-height: 1;
+}
+.grid-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    margin: 20px 0;
+}
+.stat-item {
+    background: var(--card-glass);
+    border-radius: 28px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border: 1px solid var(--border-light);
+}
+.stat-icon {
+    font-size: 1.8rem;
+}
+.stat-label {
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-transform: uppercase;
+}
+.stat-value {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--text-main);
+}
+.traits-pill {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 18px 0;
+}
+.pill {
+    background: var(--tag-soft);
+    border-radius: 40px;
+    padding: 6px 14px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-main);
+    border: 1px solid var(--border-light);
+}
+.desc-block {
+    background: var(--card-glass);
+    border-radius: 28px;
+    padding: 1rem 1.3rem;
+    margin: 1rem 0;
+    border-left: 5px solid var(--accent-primary);
+}
+.desc-text {
+    font-size: 0.85rem;
+    line-height: 1.45;
+    color: var(--text-dim);
+    font-weight: 500;
+}
+.career-footer {
+    margin-top: 1rem;
+    background: var(--inner-panel);
+    border-radius: 24px;
+    padding: 0.9rem 1.2rem;
+}
+
+/* ========== FOOTER WATERMARK ========== */
+.footer-watermark {
+    margin-top: 2rem;
+    padding-top: 1.2rem;
+    text-align: center;
+    border-top: 1px solid var(--border-light);
+    background: var(--footer-bg);
+    border-radius: 24px;
+}
+
+.watermark-main {
+    font-size: 0.7rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    color: var(--text-muted);
+    margin-bottom: 4px;
+}
+
+.watermark-sub {
+    font-size: 0.65rem;
+    font-weight: 500;
+    color: var(--text-dim);
+    opacity: 0.8;
+}
+
+/* Animations */
+@keyframes softFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+}
+@keyframes fadeSlide {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ========== MOBILE FRIENDLY STYLES ========== */
+@media (max-width: 768px) {
+    body {
+        padding: 0.75rem;
+    }
+    
+    .zodiac-container {
+        padding: 1.25rem 1.25rem 1rem;
+        border-radius: 32px;
+    }
+    
+    .mode-toggle {
+        top: 14px;
+        right: 16px;
+        padding: 6px 14px;
+        font-size: 0.7rem;
+    }
+    
+    .two-col {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        margin-top: 0.8rem;
+    }
+    
+    .brand-wrap h1 {
+        font-size: 1.8rem;
+    }
+    
+    .icon-badge {
+        font-size: 1.6rem;
+    }
+    
+    .tagline {
+        font-size: 0.75rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .input-group {
+        margin: 4px 0;
+    }
+    
+    select, input {
+        padding: 12px 16px;
+        font-size: 0.9rem;
+    }
+    
+    .btn-primary {
+        padding: 12px 12px;
+        font-size: 0.95rem;
+        margin-top: 8px;
+    }
+    
+    .result-stage {
+        padding: 1rem;
+        min-height: 420px;
+    }
+    
+    .placeholder-icon {
+        font-size: 50px;
+    }
+    
+    .placeholder-text {
+        font-size: 0.85rem;
+        padding: 6px 18px;
+    }
+    
+    /* Zodiac card mobile adjustments */
+    .card-header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 1rem;
+    }
+    
+    .zod-info {
+        gap: 12px;
+    }
+    
+    .zod-emoji {
+        width: 55px;
+        height: 55px;
+        font-size: 2.2rem;
+    }
+    
+    .zod-name {
+        font-size: 1.4rem;
+    }
+    
+    .compat-chip {
+        align-self: flex-start;
+    }
+    
+    .grid-stats {
+        gap: 10px;
+        margin: 15px 0;
+    }
+    
+    .stat-item {
+        padding: 10px 12px;
+        gap: 10px;
+    }
+    
+    .stat-icon {
+        font-size: 1.5rem;
+    }
+    
+    .stat-value {
+        font-size: 0.8rem;
+    }
+    
+    .pill {
+        padding: 5px 12px;
+        font-size: 0.7rem;
+    }
+    
+    .desc-block {
+        padding: 0.8rem 1rem;
+    }
+    
+    .desc-text {
+        font-size: 0.8rem;
+    }
+    
+    .career-footer {
+        padding: 0.7rem 1rem;
+    }
+    
+    /* Footer watermark mobile */
+    .footer-watermark {
+        margin-top: 1.5rem;
+        padding-top: 1rem;
+    }
+    
+    .watermark-main {
+        font-size: 0.6rem;
+    }
+    
+    .watermark-sub {
+        font-size: 0.55rem;
+    }
+}
+
+/* Untuk layar sangat kecil (iPhone SE, dll) */
+@media (max-width: 480px) {
+    .zodiac-container {
+        padding: 1rem 1rem 0.8rem;
+    }
+    
+    .brand-wrap h1 {
+        font-size: 1.6rem;
+    }
+    
+    .zod-name {
+        font-size: 1.2rem;
+    }
+    
+    .zod-emoji {
+        width: 48px;
+        height: 48px;
+        font-size: 2rem;
+    }
+    
+    .compat-score {
+        font-size: 1.4rem;
+    }
+    
+    .grid-stats {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+    
+    .result-stage {
+        min-height: 380px;
+    }
+}
+
+/* Untuk tablet kecil (portrait) */
+@media (min-width: 769px) and (max-width: 900px) {
+    .two-col {
+        gap: 1.5rem;
+    }
+    
+    .zod-name {
+        font-size: 1.4rem;
+    }
+    
+    .zod-emoji {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+::selection {
+    background: var(--accent-primary);
+    color: white;
+}
