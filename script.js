@@ -114,14 +114,14 @@ darkToggle.addEventListener('click', () => {
 
 // Helper random dynamic compatibility (menambah keseruan)
 function getDynamicComp(baseComp) {
-    let shift = Math.floor(Math.random() * 7) - 3; // -3 .. +3
+    let shift = Math.floor(Math.random() * 9) - 4; // -4 .. +4
     let newComp = baseComp + shift;
     if (newComp > 99) newComp = 99;
-    if (newComp < 70) newComp = 70;
+    if (newComp < 68) newComp = 68;
     return newComp;
 }
 
-// Fungsi generate ramalan lucu & modern
+// Fungsi generate ramalan
 function generateForecast() {
     const selectedKey = zodiacSelect.value;
     const userNick = nickInput.value.trim();
@@ -135,7 +135,9 @@ function generateForecast() {
         "aura positivity meningkat drastis ✨",
         "zodiak ini bikin kamu makin glow up!",
         "no cap, ini ramalan paling akurat buat kamu 🧢",
-        "totally underrated sih, kamu cocok banget 💯"
+        "totally underrated sih, kamu cocok banget 💯",
+        "sistem pakar bilang: kecocokanmu tinggi banget! 📊",
+        "berdasarkan analisis zodiak, kamu terbaik! ⭐"
     ];
     const randomQuote = randomQuoteArr[Math.floor(Math.random() * randomQuoteArr.length)];
 
@@ -175,7 +177,7 @@ function generateForecast() {
             </div>
 
             <div class="career-footer">
-                <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px;">
+                <div style="display:flex; align-items:center; gap:10px; margin-bottom:6px; flex-wrap:wrap;">
                     <span>💼</span> <strong style="color:var(--text-main);">karier yang cocok banget:</strong>
                 </div>
                 <div class="desc-text" style="margin-bottom:4px;">${data.career}</div>
@@ -191,7 +193,14 @@ forecastBtn.addEventListener('click', () => {
     generateForecast();
 });
 
-// Show preview saat load pertama (biar gak kosong)
+// Handle enter key pada input
+nickInput.addEventListener('keypress', (e) => {
+    if (e.key === 'Enter') {
+        generateForecast();
+    }
+});
+
+// Show preview saat load pertama
 window.addEventListener('DOMContentLoaded', () => {
     applyDarkMode(false);
     generateForecast();
