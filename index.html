@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>✨ Zodify · ramalan zodiak kece ✨</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="zodiac-container" id="zodiacApp">
+    <div class="mode-toggle" id="darkmodeToggle">
+        <span>🌓</span> <span id="modeLabel">Dark mode</span> <span>⚡</span>
+    </div>
+
+    <div class="two-col">
+        <!-- kiri: form -->
+        <div class="input-panel">
+            <div class="brand-wrap">
+                <h1>zodify</h1>
+                <div class="icon-badge">🌀</div>
+            </div>
+            <div class="tagline">✨ ramalan akurat & chill buat gen z ✨</div>
+
+            <div class="input-group">
+                <label><span>🧢</span> nama panggilan</label>
+                <input type="text" id="userNick" placeholder="contoh: Jojo / Riz / Cia" value="Kiddo">
+            </div>
+
+            <div class="input-group">
+                <label><span>🔭</span> pilih zodiak kamu</label>
+                <select id="zodiacSelect">
+                    <option value="aries">♈ Aries · 21 Mar - 19 Apr</option>
+                    <option value="taurus">♉ Taurus · 20 Apr - 20 Mei</option>
+                    <option value="gemini">♊ Gemini · 21 Mei - 20 Jun</option>
+                    <option value="cancer">♋ Cancer · 21 Jun - 22 Jul</option>
+                    <option value="leo">♌ Leo · 23 Jul - 22 Ags</option>
+                    <option value="virgo">♍ Virgo · 23 Ags - 22 Sep</option>
+                    <option value="libra">♎ Libra · 23 Sep - 22 Okt</option>
+                    <option value="scorpio">♏ Scorpio · 23 Okt - 21 Nov</option>
+                    <option value="sagittarius">♐ Sagittarius · 22 Nov - 21 Des</option>
+                    <option value="capricorn">♑ Capricorn · 22 Des - 19 Jan</option>
+                    <option value="aquarius">♒ Aquarius · 20 Jan - 18 Feb</option>
+                    <option value="pisces">♓ Pisces · 19 Feb - 20 Mar</option>
+                </select>
+            </div>
+
+            <button class="btn-primary" id="forecastBtn">
+                <span>🌟</span> lihat ramalan <span>➡️</span>
+            </button>
+            <div style="font-size: 11px; text-align: center; color: var(--text-muted); margin-top: 12px;">⭐ daily update · based on astrology vibe</div>
+        </div>
+
+        <!-- kanan: hasil -->
+        <div class="result-stage" id="resultPanel">
+            <div class="placeholder-box">
+                <div class="placeholder-icon">🌙✨</div>
+                <div class="placeholder-text">klik "lihat ramalan" biar tau aura kamu hari ini</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
