@@ -119,7 +119,36 @@ body.light .theme-switch {
     border-color: rgba(0, 0, 0, 0.1);
 }
 
-/* LIGHT MODE */
+/* ============================================ */
+/* ========== DARK MODE (DEFAULT) ========== */
+/* ============================================ */
+body {
+    --text-primary: #ffffff;
+    --text-secondary: #e0e0ff;
+    --text-muted: #b0b0d0;
+    --text-dim: #a0a0c0;
+    --bg-card: rgba(20, 20, 45, 0.6);
+    --border-color: rgba(139, 92, 246, 0.3);
+    --input-bg: rgba(30, 30, 60, 0.8);
+    --accent: #8b5cf6;
+    --accent-light: #a78bfa;
+}
+
+/* ============================================ */
+/* ========== LIGHT MODE ========== */
+/* ============================================ */
+body.light {
+    --text-primary: #1e1b4b;
+    --text-secondary: #2d2a5e;
+    --text-muted: #5b5b8a;
+    --text-dim: #4c4c7a;
+    --bg-card: rgba(255, 255, 255, 0.85);
+    --border-color: rgba(100, 80, 255, 0.2);
+    --input-bg: rgba(240, 240, 255, 0.9);
+    --accent: #7c3aed;
+    --accent-light: #a78bfa;
+}
+
 body.light {
     background: #f0f0ff;
 }
@@ -156,6 +185,7 @@ body.light .select-trigger {
 
 body.light .btn-forecast {
     background: linear-gradient(135deg, #7c3aed, #5b21b6);
+    color: white;
 }
 
 body.light .footer-watermark {
@@ -165,6 +195,31 @@ body.light .footer-watermark {
 body.light .watermark-main,
 body.light .watermark-sub {
     color: #5b5b8a;
+}
+
+body.light .stat-chip {
+    background: rgba(100, 80, 255, 0.08);
+    color: #2d2a5e;
+}
+
+body.light .trait-tag {
+    background: rgba(100, 80, 255, 0.12);
+    color: #4c1d95;
+}
+
+body.light .desc-box {
+    background: rgba(100, 80, 255, 0.05);
+    color: #2d2a5e;
+}
+
+body.light .compat-badge {
+    background: linear-gradient(135deg, #f59e0b, #ef4444);
+    color: white;
+}
+
+body.light .career-box {
+    background: rgba(100, 80, 255, 0.05);
+    color: #2d2a5e;
 }
 
 /* === HEADER === */
@@ -246,10 +301,10 @@ body.light .watermark-sub {
 /* Section Card */
 .section-card,
 .result-card {
-    background: rgba(20, 20, 45, 0.6);
+    background: var(--bg-card);
     backdrop-filter: blur(16px);
     border-radius: 32px;
-    border: 1px solid rgba(139, 92, 246, 0.3);
+    border: 1px solid var(--border-color);
     padding: 1.8rem;
     transition: all 0.3s;
 }
@@ -260,7 +315,7 @@ body.light .watermark-sub {
     gap: 10px;
     margin-bottom: 1.8rem;
     font-weight: 600;
-    color: #c4b5fd;
+    color: var(--accent-light);
     font-size: 0.9rem;
     letter-spacing: 1px;
 }
@@ -281,7 +336,7 @@ body.light .watermark-sub {
     gap: 8px;
     font-size: 0.75rem;
     font-weight: 600;
-    color: #a78bfa;
+    color: var(--accent-light);
     margin-bottom: 8px;
     letter-spacing: 0.5px;
 }
@@ -289,19 +344,24 @@ body.light .watermark-sub {
 .input-field input {
     width: 100%;
     padding: 14px 18px;
-    background: rgba(30, 30, 60, 0.8);
-    border: 1px solid rgba(139, 92, 246, 0.3);
+    background: var(--input-bg);
+    border: 1px solid var(--border-color);
     border-radius: 20px;
     font-family: inherit;
     font-size: 0.95rem;
-    color: #ffffff;
+    color: var(--text-primary);
     outline: none;
     transition: all 0.2s;
 }
 
 .input-field input:focus {
-    border-color: #8b5cf6;
+    border-color: var(--accent);
     box-shadow: 0 0 20px rgba(139, 92, 246, 0.2);
+}
+
+.input-field input::placeholder {
+    color: var(--text-muted);
+    opacity: 0.6;
 }
 
 .input-glow {
@@ -310,7 +370,7 @@ body.light .watermark-sub {
     left: 0;
     width: 0;
     height: 2px;
-    background: linear-gradient(90deg, #8b5cf6, #c084fc);
+    background: linear-gradient(90deg, var(--accent), var(--accent-light));
     transition: width 0.3s;
 }
 
@@ -327,10 +387,10 @@ body.light .watermark-sub {
 .select-trigger {
     width: 100%;
     padding: 14px 18px;
-    background: rgba(30, 30, 60, 0.8);
-    border: 1px solid rgba(139, 92, 246, 0.3);
+    background: var(--input-bg);
+    border: 1px solid var(--border-color);
     border-radius: 20px;
-    color: #ffffff;
+    color: var(--text-primary);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -339,7 +399,7 @@ body.light .watermark-sub {
 }
 
 .select-trigger:hover {
-    border-color: #8b5cf6;
+    border-color: var(--accent);
 }
 
 .select-dropdown {
@@ -349,7 +409,7 @@ body.light .watermark-sub {
     width: 100%;
     background: rgba(25, 25, 50, 0.95);
     backdrop-filter: blur(12px);
-    border: 1px solid rgba(139, 92, 246, 0.3);
+    border: 1px solid var(--border-color);
     border-radius: 20px;
     max-height: 250px;
     overflow-y: auto;
@@ -370,7 +430,7 @@ body.light .watermark-sub {
     padding: 12px 18px;
     cursor: pointer;
     transition: background 0.2s;
-    color: #e0e0ff;
+    color: var(--text-secondary);
 }
 
 .select-dropdown div:hover {
@@ -441,7 +501,7 @@ body.light .watermark-sub {
 
 .placeholder-constellation i {
     font-size: 28px;
-    color: #a78bfa;
+    color: var(--accent-light);
     animation: pulseStar 1.5s infinite;
 }
 
@@ -459,14 +519,14 @@ body.light .watermark-sub {
 }
 
 .result-placeholder p {
-    color: #a0a0c0;
+    color: var(--text-muted);
     font-size: 0.9rem;
 }
 
 .cosmic-line {
     width: 60px;
     height: 2px;
-    background: linear-gradient(90deg, transparent, #8b5cf6, transparent);
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
     margin: 1rem auto 0;
 }
 
@@ -498,7 +558,7 @@ body.light .watermark-sub {
 
 .zodiac-avatar {
     font-size: 4rem;
-    background: linear-gradient(135deg, #8b5cf6, #c084fc);
+    background: linear-gradient(135deg, var(--accent), var(--accent-light));
     width: 100px;
     height: 100px;
     border-radius: 50%;
@@ -512,7 +572,7 @@ body.light .watermark-sub {
 .zodiac-name-large {
     font-size: 1.8rem;
     font-weight: 700;
-    color: #ffffff;
+    color: var(--text-primary);
 }
 
 .zodiac-date-badge {
@@ -521,6 +581,7 @@ body.light .watermark-sub {
     padding: 4px 12px;
     border-radius: 20px;
     font-size: 0.7rem;
+    color: var(--text-secondary);
     margin-top: 8px;
 }
 
@@ -530,6 +591,7 @@ body.light .watermark-sub {
     border-radius: 20px;
     text-align: center;
     margin: 1rem 0;
+    color: white;
 }
 
 .compat-badge .score {
@@ -545,15 +607,18 @@ body.light .watermark-sub {
 }
 
 .stat-chip {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(139, 92, 246, 0.15);
     border-radius: 20px;
     padding: 12px;
     text-align: center;
+    color: var(--text-secondary);
 }
 
 .stat-chip i {
     font-size: 1.5rem;
-    color: #a78bfa;
+    color: var(--accent-light);
+    margin-bottom: 6px;
+    display: block;
 }
 
 .traits-container {
@@ -569,25 +634,32 @@ body.light .watermark-sub {
     border-radius: 30px;
     font-size: 0.7rem;
     font-weight: 500;
+    color: var(--text-secondary);
 }
 
 .desc-box {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(139, 92, 246, 0.08);
     border-radius: 20px;
     padding: 1rem;
     margin: 1rem 0;
-    border-left: 3px solid #8b5cf6;
+    border-left: 3px solid var(--accent);
 }
 
 .desc-box p {
     line-height: 1.6;
     font-size: 0.85rem;
+    color: var(--text-secondary);
 }
 
 .career-box {
-    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(124, 58, 237, 0.05));
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.12), rgba(124, 58, 237, 0.06));
     border-radius: 20px;
     padding: 1rem;
+    color: var(--text-secondary);
+}
+
+.career-box p {
+    font-size: 0.8rem;
 }
 
 /* Footer */
@@ -595,7 +667,7 @@ body.light .watermark-sub {
     margin-top: 2.5rem;
     padding-top: 1.5rem;
     text-align: center;
-    border-top: 1px solid rgba(139, 92, 246, 0.2);
+    border-top: 1px solid var(--border-color);
     position: relative;
     z-index: 2;
 }
@@ -607,13 +679,13 @@ body.light .watermark-sub {
     transform: translateX(-50%);
     width: 100px;
     height: 2px;
-    background: linear-gradient(90deg, transparent, #8b5cf6, transparent);
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
 }
 
 .watermark-main {
     font-size: 0.7rem;
     font-weight: 600;
-    color: #8888aa;
+    color: var(--text-muted);
     letter-spacing: 1px;
     margin-bottom: 4px;
 }
@@ -625,7 +697,7 @@ body.light .watermark-sub {
 
 .watermark-sub {
     font-size: 0.6rem;
-    color: #666688;
+    color: var(--text-dim);
 }
 
 .watermark-sub i {
@@ -702,6 +774,6 @@ body.light .watermark-sub {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: #8b5cf6;
+    background: var(--accent);
     border-radius: 10px;
 }
