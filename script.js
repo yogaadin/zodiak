@@ -1,4 +1,4 @@
-// Menyiapkan pilihan tanggal dan bulan otomatis saat web dibuka
+// --- Inisialisasi Dropdown Hari & Bulan ---
 const daySelect = document.getElementById('day');
 const monthSelect = document.getElementById('month');
 const months = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
@@ -6,83 +6,70 @@ const months = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustu
 for (let d = 1; d <= 31; d++) daySelect.innerHTML += `<option value="${d}">${d}</option>`;
 months.forEach((m, i) => monthSelect.innerHTML += `<option value="${i+1}">${m}</option>`);
 
-// Database Karakter Kosmis Gen Z
+// --- Database Zodiak + Data Karir Masa Kini ---
 const zodiaks = [
-  { 
-    name:'Aries', symbol:'♈', range:'21 Mar – 19 Apr', element:'Api', color:'#ffeedb', bg:'#ff763d', planet:'Mars', lucky:'Merah Cabe', icon:'🔥', 
+  { name:'Aries', symbol:'♈', range:'21 Mar – 19 Apr', element:'Api', color:'#ffeedb', bg:'#ff763d', planet:'Mars', lucky:'Merah Cabe', icon:'🔥', 
     sifat:['Gaspol','Bossy','Setia Kawan','Ambisius'], 
-    desc:'lu itu definisi manusia berenergi nuklir. Nggak suka basa-basi, kalau mau sesuatu harus dapet SEKARANG. Pemimpin alami tapi kadang sumbunya agak pendek ya, senggol bacok!',
-    karir:'CEO Start-up, Project Manager, Content Creator, Entrepreneur. Pokoknya posisi yang bisa ngatur orang dan bukan diatur, biar jiwa kompetitif lo tersalurkan!'
-  },
-  { 
-    name:'Taurus', symbol:'♉', range:'20 Apr – 20 Mei', element:'Tanah', color:'#eafaf1', bg:'#22c55e', planet:'Venus', lucky:'Hijau Matcha', icon:'🌱', 
+    career: 'Founder Startup, Project Manager, / Professional Athlete',
+    desc:'Lu itu definisi manusia berenergi nuklir. Nggak suka basa-basi, kalau mau sesuatu harus dapet SEKARANG. Pemimpin alami tapi kadang sumbunya agak pendek ya, senggol bacok!' },
+  
+  { name:'Taurus', symbol:'♉', range:'20 Apr – 20 Mei', element:'Tanah', color:'#eafaf1', bg:'#22c55e', planet:'Venus', lucky:'Hijau Matcha', icon:'🌱', 
     sifat:['Kaum Rebahan','Loyal Pol','Seleranya Elit','Keras Kepala'], 
-    desc:'kesenangan hidup lu sederhana: makan enak, tidur nyenyak, dan saldo rekening aman. Lu tipe pacar atau sahabat idaman karena setia mampus, tapi kalau udah ngambek... beuh susah luluh!',
-    karir:'Financial Planner, Food Vlogger, UI/UX Designer, Banker. Kerjaan yang menghasilkan cuan stabil dan berhubungan dengan estetika atau kenyamanan adalah jalan ninja lo.'
-  },
-  { 
-    name:'Gemini', symbol:'♊', range:'21 Mei – 20 Jun', element:'Udara', color:'#fefce8', bg:'#eab308', planet:'Merkurius', lucky:'Kuning Lemon', icon:'💨', 
+    career: 'Financial Planner, Food Vlogger, / Luxury Brand Manager',
+    desc:'Kesenangan hidup lu sederhana: makan enak, tidur nyenyak, dan saldo rekening aman. Lu tipe pacar atau sahabat idaman karena setia mampus, tapi kalau udah ngambek... beuh susah luluh!' },
+  
+  { name:'Gemini', symbol:'♊', range:'21 Mei – 20 Jun', element:'Udara', color:'#fefce8', bg:'#eab308', planet:'Merkurius', lucky:'Kuning Lemon', icon:'💨', 
     sifat:['Social Butterfly','Overthinker','Asik Pol','Bunglon'], 
-    desc:'katanya berkepribadian ganda, padahal lu cuma punya banyak mode aja! Lu seru banget diajak deep talk ataupun ngegosip. Otak lu cepet dapet info baru, tapi cepet bosenan juga.',
-    karir:'PR Specialist, Social Media Manager, Jurnalis, Podcaster. Pokoknya kerjaan yang butuh cuap-cuap dan ketemu banyak orang baru tiap hari biar gak mati bosan.'
-  },
-  { 
-    name:'Cancer', symbol:'♋', range:'21 Jun – 22 Jul', element:'Air', color:'#f0fdfa', bg:'#14b8a6', planet:'Bulan', lucky:'Perak Estetik', icon:'💧', 
+    career: 'PR Specialist, Content Creator, / Live Streamer',
+    desc:'Katanya berkepribadian ganda, padahal lu cuma punya banyak mode aja! Lu seru banget diajak deep talk ataupun ngegosip. Otak lu cepet dapet info baru, tapi cepet bosenan juga.' },
+  
+  { name:'Cancer', symbol:'♋', range:'21 Jun – 22 Jul', element:'Air', color:'#f0fdfa', bg:'#14b8a6', planet:'Bulan', lucky:'Perak Estetik', icon:'💧', 
     sifat:['Perasa (Sefruit Sadboy)','Intuisi Kuat','Homebody','Protektif'], 
-    desc:'hati lu selembut tisu dibagi dua. Empati lu tinggi banget, suka jagain temen-temen lu layaknya seorang ibu. Tapi hati-hati, kalau lo udah masuk ke mode *shell mode*, semua orang lo cuekin.',
-    karir:'HRD, Psikolog, Chef/Kuliner, Interior Designer. Lo cocok banget di bidang yang merawat atau memahami perasaan orang lain, atau yang bisa dikerjain secara WFH!'
-  },
-  { 
-    name:'Leo', symbol:'👑', range:'23 Jul – 22 Ags', element:'Api', color:'#fff7ed', bg:'#f97316', planet:'Matahari', lucky:'Emas Berkilau', icon:'🦁', 
+    career: 'Psychologist, HRD, / Interior Designer (WFH Enthusiast)',
+    desc:'Hati lu selembut tisu dibagi dua. Empati lu tinggi banget, suka jagain temen-temen lu layaknya seorang ibu. Tapi hati-hati, kalau lo udah masuk ke mode *shell mode*, semua orang lo cuekin.' },
+  
+  { name:'Leo', symbol:'👑', range:'23 Jul – 22 Ags', element:'Api', color:'#fff7ed', bg:'#f97316', planet:'Matahari', lucky:'Emas Berkilau', icon:'🦁', 
     sifat:['Main Character','Pede Pol','Royal','Drama dikit'], 
-    desc:'lu lahir dengan aura *Main Character*. Suka jadi pusat perhatian, berhati emas, dan royal banget sama orang terdekat. Agak gengsian dikit sih, tapi aslinya lu penyayang banget.',
-    karir:'Aktor/Talent, Creative Director, Event Organizer, Influencer. Kerjaan apa pun yang panggungnya luas dan bikin nama lo dipuja-puja netizen atau rekan kerja.'
-  },
-  { 
-    name:'Virgo', symbol:'♍', range:'23 Ags – 22 Sep', element:'Tanah', color:'#fafafa', bg:'#64748b', planet:'Merkurius', lucky:'Cokelat Pastel', icon:'⚙️', 
+    career: 'Creative Director, Event Organizer, / Influencer / Actor',
+    desc:'Lu lahir dengan aura *Main Character*. Suka jadi pusat perhatian, berhati emas, dan royal banget sama orang terdekat. Agak gengsian dikit sih, tapi aslinya lu penyayang banget.' },
+  
+  { name:'Virgo', symbol:'♍', range:'23 Ags – 22 Sep', element:'Tanah', color:'#fafafa', bg:'#64748b', planet:'Merkurius', lucky:'Cokelat Pastel', icon:'⚙️', 
     sifat:['Perfeksionis','Over-analyzer','Rapi Efisien','Mandiri'], 
-    desc:'nggak ada detail yang lolos dari mata lu. Semua harus sesuai rencana dan rapi. Lu sering jadi tempat curhat karena solusi lo realistis banget, walaupun kadang kritikan lo agak pedes.',
-    karir:'Data Analyst, Quality Assurance (QA), Editor, Akuntan. Insting detektif lo yang super teliti bakal dihargai banget di sini. No typo, no error, perfect!'
-  },
-  { 
-    name:'Libra', symbol:'♎', range:'23 Sep – 22 Okt', element:'Udara', color:'#fdf2f8', bg:'#ec4899', planet:'Venus', lucky:'Pink Pastel', icon:'⚖️', 
+    career: 'Data Analyst, Editor, / Quality Assurance (QA)',
+    desc:'Nggak ada detail yang lolos dari mata lu. Semua harus sesuai rencana dan rapi. Lu sering jadi tempat curhat karena solusi lo realistis banget, walaupun kadang kritikan lo agak pedes.' },
+  
+  { name:'Libra', symbol:'♎', range:'23 Sep – 22 Okt', element:'Udara', color:'#fdf2f8', bg:'#ec4899', planet:'Venus', lucky:'Pink Pastel', icon:'⚖️', 
     sifat:['Plinplan','Peace Maker','Modis','Aesthetic Finder'], 
-    desc:'lu adalah pemburu estetika sejati. Paling anti konflik dan suka kedamaian. Tapi kalau disuruh milih tempat makan? Bisa berjam-jam karena timbangan lu nggak pernah seimbang!',
-    karir:'Fashion Stylist, Diplomat/Negosiator, Wedding Planner, Beauty Blogger. Kerjaan yang mengedepankan keindahan, harmoni, dan seni bikin lo semangat kerja senin-jumat.'
-  },
-  { 
-    name:'Scorpio', symbol:'🦂', range:'23 Okt – 21 Nov', element:'Air', color:'#fae8ff', bg:'#a855f7', planet:'Pluto', lucky:'Hitam Misterius', icon:'🔮', 
+    career: 'Fashion Stylist, Lawyer/Mediator, / Beauty Influencer',
+    desc:'Lu adalah pemburu estetika sejati. Paling anti konflik dan suka kedamaian. Tapi kalau disuruh milih tempat makan? Bisa berjam-jam karena timbangan lu nggak pernah seimbang!' },
+  
+  { name:'Scorpio', symbol:'🦂', range:'23 Okt – 21 Nov', element:'Air', color:'#fae8ff', bg:'#a855f7', planet:'Pluto', lucky:'Hitam Misterius', icon:'🔮', 
     sifat:['Misterius','Detektif','Setia Mati-matian','Intens'], 
-    desc:'aura lu misterius bikin orang penasaran. Insting detektif lu kuat banget, jangan harap ada yang bisa bohongin lu. Sekali dikhianati kelar udah, tapi kalau lu udah sayang, bakal dijagain mati-matian.',
-    karir:'Cybersecurity Specialist, Investigator/Intel, Psikiater, Researcher. Investigasi rahasia atau memecahkan misteri/konspirasi rumit adalah keahlian alami lo.'
-  },
-  { 
-    name:'Sagitarius', symbol:'🏹', range:'22 Nov – 21 Des', element:'Api', color:'#e0f2fe', bg:'#0284c7', planet:'Jupiter', lucky:'Biru Elektrik', icon:'🌌', 
+    career: 'Investigator, Cyber Security, / Trader / Financial Analyst',
+    desc:'Aura lu misterius bikin orang penasaran. Insting detektif lu kuat banget, jangan harap ada yang bisa bohongin lu. Sekali dikhianati kelar udah, tapi kalau lu udah sayang, bakal dijagain mati-matian.' },
+  
+  { name:'Sagitarius', symbol:'🏹', range:'22 Nov – 21 Des', element:'Api', color:'#e0f2fe', bg:'#0284c7', planet:'Jupiter', lucky:'Biru Elektrik', icon:'🌌', 
     sifat:['Jiwa Bebas','Pelawak','Jujur Kebablasan','Petualang'], 
-    desc:'lu adalah definisi manusia bebas tanpa beban. Selalu optimis, suka jalan-jalan, dan hobi ngelawak. Kadang kalau ngomong suka jujur kebablasan sampai bikin orang tersedak, tapi aslinya gak bermaksud jahat kok.',
-    karir:'Travel Blogger, Tour Guide, Pilot/Pramugari, Stand-up Comedian. Kerjaan yang gak bikin lo dikurung di kubikel kantor 9-to-5 dan membebaskan lo untuk keliling dunia.'
-  },
-  { 
-    name:'Capricorn', symbol:'♑', range:'22 Des – 19 Jan', element:'Tanah', color:'#f1f5f9', bg:'#475569', planet:'Saturnus', lucky:'Abu-abu Minimalis', icon:'⛰️', 
+    career: 'Travel Blogger, Stand-up Comedian, / Tour Guide Specialist',
+    desc:'Lu adalah definisi manusia bebas tanpa beban. Selalu optimis, suka jalan-jalan, dan hobi ngelawak. Kadang kalau ngomong suka jujur kebablasan sampai bikin orang tersedak, tapi aslinya gak bermaksud jahat kok.' },
+  
+  { name:'Capricorn', symbol:'♑', range:'22 Des – 19 Jan', element:'Tanah', color:'#f1f5f9', bg:'#475569', planet:'Saturnus', lucky:'Abu-abu Minimalis', icon:'⛰️', 
     sifat:['Hustle Culture','Dewasa','Disiplin','Skeptis'], 
-    desc:'anak magang teladan atau calon CEO ya lu ini. Otak lu isinya cuan, karier, dan masa depan. Kelihatan kaku dan dingin di luar, padahal aslinya lu cuma lagi capek mikirin masa depan aja.',
-    karir:'Investment Banker, Manajer Operasional, Developer Real Estate, Arsitek. Bidang-bidang berstruktur jelas yang tangga karirnya tinggi dan menjanjikan kekayaan jangka panjang.'
-  },
-  { 
-    name:'Aquarius', symbol:'♒', range:'20 Jan – 18 Feb', element:'Udara', color:'#ecfeff', bg:'#06b6d4', planet:'Uranus', lucky:'Neon Teal', icon:'⚡', 
+    career: 'Investment Banker, CEO / Co-Founder, / Business Strategist',
+    desc:'Anak magang teladan atau calon CEO ya lu ini. Otak lu isinya cuan, karier, dan masa depan. Kelihatan kaku dan dingin di luar, padahal aslinya lu cuma lagi capek mikirin masa depan aja.' },
+  
+  { name:'Aquarius', symbol:'♒', range:'20 Jan – 18 Feb', element:'Udara', color:'#ecfeff', bg:'#06b6d4', planet:'Uranus', lucky:'Neon Teal', icon:'⚡', 
     sifat:['Unik/Aneh','Visioner','Gak Suka Ikut-ikutan','Savage'], 
-    desc:'lu sering dibilang dateng dari planet lain karena jalan pikiran lo yang unik banget. Lu gak suka ikut-ikutan tren, mandiri, dan visioner. Singkatnya: lu adalah definisi *indie* sejati.',
-    karir:'Software Engineer, Aktivis LSM, AI Specialist, Trend Forecaster. Sesuatu yang berbau teknologi masa depan atau gerakan sosial kemানুsiaan yang mendobrak sistem lama.'
-  },
-  { 
-    name:'Pisces', symbol:'🌊', range:'19 Feb – 20 Mar', element:'Air', color:'#e0e7ff', bg:'#4f46e5', planet:'Neptunus', lucky:'Ungu Lavender', icon:'🎨', 
+    career: 'UI/UX Designer, Tech Developer, / Trend Forecaster',
+    desc:'Lu sering dibilang dateng dari planet lain karena jalan pikiran lo yang unik banget. Lu gak suka ikut-ikutan tren, mandiri, dan visioner. Singkatnya: lu adalah definisi *indie* sejati.' },
+  
+  { name:'Pisces', symbol:'🌊', range:'19 Feb – 20 Mar', element:'Air', color:'#e0e7ff', bg:'#4f46e5', planet:'Neptunus', lucky:'Ungu Lavender', icon:'🎨', 
     sifat:['Pemimpi','Kreatif Sastra','Baperan','Indra Keenam'], 
-    desc:'lu hidup di dunia mimpi yang penuh imajinasi. Kreatif banget, berjiwa seni, dan sensitif sama perasaan orang lain. Kadang suka kabur dari kenyataan ke dunia fantasi buatan lo sendiri.',
-    karir:'Penulis/Scriptwriter, Musisi, Animator, Fotografer. Dunia kreatif, seni visual, dan fiksi adalah tempat terbaik lo menuangkan isi kepala lo yang penuh keajaiban.'
-  }
+    career: 'Musician / Songwriter, Illustrator, / Photographer',
+    desc:'Lu hidup di dunia mimpi yang penuh imajinasi. Kreatif banget, berjiwa seni, dan sensitif sama perasaan orang lain. Kadang suka kabur dari kenyataan ke dunia fantasi buatan lo sendiri.' }
 ];
 
-// Algoritma Penentuan Zodiak Berdasarkan Tanggal & Bulan
+// --- Logika Penentu Algoritma Astrologi ---
 function getZodiak(d, m) {
   if ((m===1&&d>=20)||(m===2&&d<=18)) return zodiaks[10];
   if ((m===2&&d>=19)||(m===3&&d<=20)) return zodiaks[11];
@@ -98,14 +85,13 @@ function getZodiak(d, m) {
   return zodiaks[9];
 }
 
-// Fungsi Utama: Mengeluarkan Output Data Kepribadian
+// --- Fungsi Render Hasil UI ---
 function generateZodiac() {
   const d = parseInt(daySelect.value);
   const m = parseInt(monthSelect.value);
   const nameInput = document.getElementById('username').value.trim();
   const z = getZodiak(d, m);
   
-  // Kalkulasi acak yang konsisten berdasarkan nama & tanggal untuk Vibe Match %
   const rateSeed = (nameInput.length + d + m) * 9;
   const compatibilityRate = 75 + (rateSeed % 22); 
 
@@ -152,20 +138,24 @@ function generateZodiac() {
         ${z.sifat.map(s => `<span class="sifat-tag">${s}</span>`).join('')}
       </div>
 
+      <div class="section-title">💼 Cari Cuan Vibes:</div>
+      <div class="career-box">
+        <span class="career-icon">🚀</span>
+        <div class="career-text-wrapper">
+          <span class="career-title">${z.career}</span>
+          <span class="career-desc">Karier di atas cocok banget sama energi rasi bintang lo!</span>
+        </div>
+      </div>
+
       <div class="section-title">📜 Spill Realita:</div>
       <div class="character-box">
         <p class="desc-text">${sapaan}${z.desc}</p>
-      </div>
-
-      <div class="section-title" style="color: var(--text-muted); font-weight: 600;">💼 Rekomendasi Karir Masa Depan:</div>
-      <div class="career-box">
-        <p class="career-text">${z.karir}</p>
       </div>
     </div>
   `;
 }
 
-// Fungsi Dark Mode Switcher
+// --- Kontrol Tema: Dark / Light Mode ---
 function toggleTheme() {
     const html = document.documentElement;
     const btn = document.getElementById('themeBtn');
