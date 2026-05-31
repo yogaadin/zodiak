@@ -1,41 +1,40 @@
-/* --- Variabel & Desain Sistem (Elegant Cyber-Pastel) --- */
+/* --- Variabel & Desain Sistem (Cosmic Bubble) --- */
 :root[data-theme="dark"] {
-    --bg-global: radial-gradient(circle at 50% 50%, #16113a 0%, #080516 100%);
-    --bg-card: rgba(26, 21, 52, 0.75);
-    --bg-inner-card: rgba(39, 32, 75, 0.5);
-    --bg-tag: rgba(129, 140, 248, 0.15);
-    --border-color: rgba(129, 140, 248, 0.25);
+    --bg-global: radial-gradient(circle at 50% 50%, #1e1b4b 0%, #090514 100%);
+    --bg-card: #151226;
+    --bg-inner-card: #221c3d;
+    --bg-tag: rgba(255, 255, 255, 0.08);
+    --border-color: #312e81;
     --text-primary: #ffffff;
-    --text-secondary: #cbd5e1;
-    --text-muted: #a5b4fc;
-    --btn-bg: linear-gradient(135deg, #818cf8 0%, #a78bfa 100%);
-    --btn-text: #080516;
-    --card-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.05);
-    --bubble-shadow: 0 8px 20px rgba(129, 140, 248, 0.15);
-    --blur-glass: blur(16px);
+    --text-secondary: #c7d2fe;
+    --text-muted: #818cf8;
+    --btn-bg: #818cf8;
+    --btn-text: #090514;
+    --card-shadow: 8px 8px 0px #090514;
+    --bubble-shadow: inset -4px -4px 0px rgba(0,0,0,0.2);
 }
 
 :root[data-theme="light"] {
-    --bg-global: linear-gradient(135deg, #f5f3ff 0%, #e0e7ff 100%);
-    --bg-card: rgba(255, 255, 255, 0.85);
-    --bg-inner-card: rgba(241, 245, 249, 0.9);
-    --bg-tag: rgba(99, 102, 241, 0.08);
-    --border-color: rgba(99, 102, 241, 0.15);
+    --bg-global: radial-gradient(circle at 50% 50%, #e0e7ff 0%, #c7d2fe 100%);
+    --bg-card: #ffffff;
+    --bg-inner-card: #f3f4f6;
+    --bg-tag: rgba(0, 0, 0, 0.05);
+    --border-color: #1e1b4b;
     --text-primary: #1e1b4b;
-    --text-secondary: #475569;
+    --text-secondary: #4338ca;
     --text-muted: #6366f1;
-    --btn-bg: linear-gradient(135deg, #ff763d 0%, #ff9e75 100%);
+    --btn-bg: #ff763d;
     --btn-text: #ffffff;
-    --card-shadow: 0 20px 40px rgba(99, 102, 241, 0.1), 0 0 0 1px rgba(99, 102, 241, 0.05);
-    --bubble-shadow: 0 8px 20px rgba(255, 118, 61, 0.15);
-    --blur-glass: blur(16px);
+    --card-shadow: 6px 6px 0px #1e1b4b;
+    --bubble-shadow: inset -4px -4px 0px rgba(0,0,0,0.15);
 }
 
+/* --- Reset & Base --- */
 * { 
     box-sizing: border-box; 
     margin: 0; 
     padding: 0; 
-    transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s, border-color 0.3s, box-shadow 0.3s;
+    transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s, border-color 0.3s;
     font-family: 'Fredoka', sans-serif;
 }
 
@@ -52,88 +51,74 @@ body {
 /* --- Main Container --- */
 .app-container { 
     width: 100%; 
-    max-width: 950px; 
+    max-width: 900px; 
     background: var(--bg-card); 
-    backdrop-filter: var(--blur-glass);
-    -webkit-backdrop-filter: var(--blur-glass);
-    border: 1px solid var(--border-color); 
-    border-radius: 32px; 
+    border: 4px solid var(--border-color); 
+    border-radius: 40px; 
     padding: 3rem 2.5rem; 
     box-shadow: var(--card-shadow); 
     display: grid; 
-    grid-template-columns: 1fr 1.2fr; 
+    grid-template-columns: 1fr 1.1fr; 
     gap: 2.5rem; 
     position: relative; 
 }
 
-/* Mode Switcher Bubble */
 .theme-toggle { 
     position: absolute; 
-    top: -18px; 
+    top: -20px; 
     right: 30px; 
-    background: var(--bg-card); 
-    backdrop-filter: var(--blur-glass);
-    -webkit-backdrop-filter: var(--blur-glass);
-    border: 1px solid var(--border-color); 
-    padding: 8px 18px; 
+    background: var(--btn-bg); 
+    border: 3px solid var(--border-color); 
+    padding: 10px 20px; 
     border-radius: 50px; 
-    color: var(--text-muted); 
-    font-size: 13px; 
-    font-weight: 600; 
+    color: var(--btn-text); 
+    font-size: 14px; 
+    font-weight: 700; 
     cursor: pointer; 
-    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
-    display: flex;
-    align-items: center;
-    gap: 6px;
+    box-shadow: 4px 4px 0px var(--border-color);
 }
-.theme-toggle:hover { transform: translateY(-2px); color: var(--text-primary); border-color: var(--text-muted); }
-.theme-toggle:active { transform: translateY(1px); }
+.theme-toggle:active { transform: translateY(4px) translateX(4px); box-shadow: 0px 0px 0px var(--border-color); }
 
-/* --- Kolom Kiri: Input --- */
+/* --- Kolom Kiri --- */
 .input-side { display: flex; flex-direction: column; justify-content: center; }
 .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 0.75rem; }
-.brand-icon { font-size: 36px; animation: bounce 3s infinite alternate cubic-bezier(0.45, 0, 0.55, 1); }
+.brand-icon { font-size: 40px; animation: bounce 2.5s infinite alternate; }
 
-h1 { font-size: 36px; font-weight: 700; background: linear-gradient(to right, var(--text-primary), var(--text-muted)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; line-height: 1.2; }
-.sub-title { font-size: 15px; color: var(--text-secondary); margin-bottom: 2rem; font-weight: 400; line-height: 1.5; }
+h1 { font-size: 32px; font-weight: 700; color: var(--text-primary); line-height: 1.2; }
+.sub-title { font-size: 15px; color: var(--text-secondary); margin-bottom: 2rem; font-weight: 400; }
 
-.form-group { margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 8px; }
-label { font-size: 13px; font-weight: 600; color: var(--text-muted); padding-left: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
+.form-group { margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 10px; }
+label { font-size: 14px; font-weight: 600; color: var(--text-muted); padding-left: 5px; }
 
 .input-wrapper { display: flex; gap: 12px; }
 
-/* Soft Bubble Inputs */
 select, input { 
     flex: 1; 
-    height: 52px; 
+    height: 54px; 
     background: var(--bg-inner-card); 
-    border: 1px solid var(--border-color); 
-    border-radius: 16px; 
-    padding: 0 18px; 
+    border: 3px solid var(--border-color); 
+    border-radius: 20px; 
+    padding: 0 20px; 
     color: var(--text-primary); 
-    font-size: 15px; 
-    font-weight: 500; 
+    font-size: 16px; 
+    font-weight: 600; 
     outline: none; 
     cursor: pointer;
     appearance: none;
     -webkit-appearance: none;
 }
-input::placeholder { color: var(--text-secondary); opacity: 0.5; }
-select:focus, input:focus { transform: translateY(-2px); border-color: var(--text-muted); box-shadow: 0 0 15px rgba(129, 140, 248, 0.15); }
+input::placeholder { color: var(--text-muted); opacity: 0.6; }
+select:focus, input:focus { transform: scale(1.02); background: var(--bg-card); }
+select option { background-color: var(--bg-card); color: var(--text-primary); }
 
-/* Dropdown Option Theme Fix */
-select option { background-color: #1a1534; color: #ffffff; }
-[data-theme="light"] select option { background-color: #ffffff; color: #1e1b4b; }
-
-/* Elegant Soft Button */
 .btn-submit { 
     width: 100%; 
-    height: 54px; 
+    height: 56px; 
     background: var(--btn-bg); 
     color: var(--btn-text); 
-    border: none; 
-    border-radius: 18px; 
-    font-size: 16px; 
+    border: 3px solid var(--border-color); 
+    border-radius: 25px; 
+    font-size: 18px; 
     font-weight: 700; 
     cursor: pointer; 
     margin-top: 1rem; 
@@ -141,117 +126,137 @@ select option { background-color: #1a1534; color: #ffffff; }
     align-items: center; 
     justify-content: center; 
     gap: 8px; 
-    box-shadow: var(--bubble-shadow);
+    box-shadow: var(--bubble-shadow), 4px 4px 0px var(--border-color);
 }
-.btn-submit:hover { transform: translateY(-3px) scale(1.01); box-shadow: 0 12px 24px rgba(129, 140, 248, 0.25); }
-.btn-submit:active { transform: translateY(1px); }
+.btn-submit:hover { transform: scale(1.03); }
+.btn-submit:active { transform: translateY(4px) translateX(4px); box-shadow: 0px 0px 0px var(--border-color); }
 
-/* --- Kolom Kanan: Hasil --- */
+/* --- Kolom Kanan --- */
 .result-side { 
     background: var(--bg-inner-card); 
-    border: 1px dashed var(--border-color); 
-    border-radius: 24px; 
+    border: 3px dashed var(--border-color); 
+    border-radius: 30px; 
     padding: 2rem;
     display: flex; 
     align-items: center; 
     justify-content: center; 
-    min-height: 480px; 
+    min-height: 450px; 
 }
 .placeholder-view { text-align: center; color: var(--text-muted); }
-.placeholder-view .icon { font-size: 50px; margin-bottom: 12px; animation: float 4s ease-in-out infinite; }
-.placeholder-view p { font-size: 14px; font-weight: 500; max-width: 260px; line-height: 1.5; color: var(--text-secondary); }
+.placeholder-view .icon { font-size: 55px; margin-bottom: 10px; animation: float 3s ease-in-out infinite; }
+.placeholder-view p { font-size: 15px; font-weight: 500; max-width: 250px; line-height: 1.4; }
 
 /* --- Kartu Zodiak Utama --- */
-.zodiac-card { width: 100%; animation: popIn 0.5s cubic-bezier(0.19, 1, 0.22, 1); }
+.zodiac-card { width: 100%; animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
 
 .zodiac-header { 
     display: flex; 
     align-items: center; 
     justify-content: space-between; 
-    margin-bottom: 1.5rem; 
+    margin-bottom: 1.25rem; 
     background: var(--bg-card);
-    border: 1px solid var(--border-color); 
+    border: 3px solid var(--border-color); 
     padding: 1.2rem; 
-    border-radius: 20px; 
-    box-shadow: 0 8px 25px rgba(0,0,0,0.05);
+    border-radius: 24px; 
+    box-shadow: 4px 4px 0px var(--border-color);
 }
 .meta-left { display: flex; align-items: center; gap: 15px; }
 .zodiac-symbol { 
-    font-size: 40px; 
-    width: 64px; 
-    height: 64px; 
+    font-size: 50px; 
+    width: 70px; 
+    height: 70px; 
+    background: var(--bg-inner-card);
+    border: 3px solid var(--border-color);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    box-shadow: var(--bubble-shadow);
 }
-.zodiac-name { font-size: 24px; font-weight: 700; color: var(--text-primary); letter-spacing: -0.5px; }
-.zodiac-range { font-size: 13px; color: var(--text-secondary); font-weight: 400; margin-top: 2px; }
- 
+.zodiac-name { font-size: 26px; font-weight: 700; color: var(--text-primary); }
+.zodiac-range { font-size: 13px; color: var(--text-muted); font-weight: 500; }
+
 .element-badge { 
     display: inline-block; 
     font-size: 11px; 
-    font-weight: 600; 
+    font-weight: 700; 
     padding: 4px 12px; 
     border-radius: 50px; 
-    margin-top: 8px;
-    filter: brightness(0.95);
+    margin-top: 6px;
+    border: 2px solid var(--border-color);
+    box-shadow: var(--bubble-shadow);
 }
 
-.compatibility-box { text-align: center; background: var(--bg-inner-card); padding: 10px 14px; border-radius: 14px; border: 1px solid var(--border-color); }
-.comp-val { font-size: 22px; font-weight: 700; color: var(--text-muted); }
-.comp-lbl { font-size: 11px; color: var(--text-secondary); font-weight: 500; text-transform: uppercase; margin-top: 2px; }
+.compatibility-box { text-align: center; background: var(--bg-inner-card); padding: 8px 12px; border-radius: 16px; border: 2px solid var(--border-color); }
+.comp-val { font-size: 24px; font-weight: 800; color: var(--btn-bg); }
+.comp-lbl { font-size: 11px; color: var(--text-muted); font-weight: 600; }
 
-/* Grid Atribut Mini */
-.attr-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 1.5rem; }
+/* Grid Atribut */
+.attr-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 1.25rem; }
 .attr-block { 
     background: var(--bg-card); 
-    border: 1px solid var(--border-color); 
-    border-radius: 16px; 
-    padding: 12px; 
+    border: 3px solid var(--border-color); 
+    border-radius: 20px; 
+    padding: 10px; 
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 3px 3px 0px var(--border-color);
+}
+.attr-icon { font-size: 24px; }
+.attr-info { display: flex; flex-direction: column; }
+.attr-label { font-size: 11px; color: var(--text-muted); font-weight: 600; }
+.attr-value { font-size: 13px; color: var(--text-primary); font-weight: 700; }
+
+/* Sifat Tags */
+.section-title { font-size: 13px; font-weight: 700; color: var(--text-muted); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+.sifat-flex { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.25rem; }
+.sifat-tag { 
+    font-size: 13px; 
+    font-weight: 600; 
+    padding: 6px 14px; 
+    border-radius: 50px; 
+    background: var(--bg-card); 
+    border: 2px solid var(--border-color); 
+    color: var(--text-primary); 
+    box-shadow: var(--bubble-shadow);
+}
+
+/* Rekomendasi Karier */
+.career-box {
+    background: var(--bg-card);
+    border: 3px solid var(--border-color);
+    padding: 1rem;
+    border-radius: 24px;
+    box-shadow: 4px 4px 0px var(--border-color);
+    margin-bottom: 1.25rem;
     display: flex;
     align-items: center;
     gap: 12px;
 }
-.attr-icon { font-size: 20px; }
-.attr-info { display: flex; flex-direction: column; }
-.attr-label { font-size: 11px; color: var(--text-secondary); font-weight: 500; }
-.attr-value { font-size: 13px; color: var(--text-primary); font-weight: 600; margin-top: 1px; }
+.career-icon { font-size: 32px; background: var(--bg-inner-card); padding: 8px; border-radius: 16px; border: 2px solid var(--border-color); }
+.career-text-wrapper { display: flex; flex-direction: column; }
+.career-title { font-size: 15px; font-weight: 700; color: var(--text-primary); }
+.career-desc { font-size: 12px; color: var(--text-secondary); margin-top: 2px; font-weight: 500; }
 
-/* Sifat Tags */
-.section-title { font-size: 12px; font-weight: 600; color: var(--text-muted); margin-bottom: 10px; display: flex; align-items: center; gap: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
-.sifat-flex { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.5rem; }
-.sifat-tag { 
-    font-size: 13px; 
-    font-weight: 500; 
-    padding: 6px 14px; 
-    border-radius: 50px; 
-    background: var(--bg-tag); 
-    border: 1px solid var(--border-color); 
-    color: var(--text-primary); 
-}
-
-/* Deskripsi Konten */
-.character-box, .career-box { 
+/* Deskripsi Karakter */
+.character-box { 
     background: var(--bg-card); 
-    border: 1px solid var(--border-color); 
+    border: 3px solid var(--border-color); 
     padding: 1.2rem; 
-    border-radius: 20px; 
-    margin-bottom: 1.5rem;
+    border-radius: 24px; 
+    box-shadow: 4px 4px 0px var(--border-color);
 }
-.career-box { margin-bottom: 0; background: linear-gradient(to bottom right, var(--bg-card), var(--bg-inner-card)); border-left: 3px solid var(--text-muted); }
-.desc-text, .career-text { font-size: 14px; color: var(--text-secondary); line-height: 1.6; font-weight: 400; }
-.desc-text strong { color: var(--text-primary); font-weight: 600; }
+.desc-text { font-size: 14px; color: var(--text-secondary); line-height: 1.6; font-weight: 500; }
 
 /* --- Animations --- */
-@keyframes float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-8px) rotate(3deg); } }
-@keyframes bounce { 0% { transform: translateY(0) scale(1); } 100% { transform: translateY(-4px) scale(1.04); } }
-@keyframes popIn { from { opacity: 0; transform: translateY(10px) scale(0.96); } to { opacity: 1; transform: translateY(0) scale(1); } }
+@keyframes float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-10px) rotate(5deg); } }
+@keyframes bounce { 0% { transform: scale(1); } 100% { transform: scale(1.1) rotate(-3deg); } }
+@keyframes popIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
 
 /* Responsive */
 @media (max-width: 768px) {
     .app-container { grid-template-columns: 1fr; gap: 2rem; padding: 2rem 1.5rem; margin-top: 1.5rem; }
     body { padding: 1rem; }
-    .theme-toggle { top: -12px; right: 20px; }
+    .theme-toggle { top: -15px; right: 20px; }
 }
