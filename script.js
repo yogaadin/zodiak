@@ -213,7 +213,7 @@ function generateForecast() {
         
         <div class="desc-box">
             <p>✨ <strong>Vibe Kepribadian:</strong> ${data.desc}</p>
-            <p style="margin-top: 10px; color: #a78bfa;">⭐ “${randomQuote}”</p>
+            <p style="margin-top: 10px; color: var(--accent-light);">⭐ “${randomQuote}”</p>
         </div>
         
         <div class="career-box">
