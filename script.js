@@ -9,7 +9,7 @@ const zodiacLibrary = {
     },
     taurus: {
         name: "Taurus", symbol: "♉", emoji: "🐮", element: "🌍 Bumi", range: "20 Apr – 20 Mei",
-        matchWith: "Virgo & Capricorn", baseComp: 88,
+        matchWith: "Capricorn & Virgo", baseComp: 88,
         lucky: "Hijau / Angka 6", traits: ["Loyal", "Sabar", "Humble", "Foodie"],
         desc: "Orangnya stabil kayak gunung, tapi kalau sudah nyaman bisa sangat asyik dan dependable.",
         career: "Chef, desainer, wealth manager."
