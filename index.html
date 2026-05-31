@@ -7,19 +7,284 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300..700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+    
+    <style>
+        /* --- Variabel & Desain Sistem (Cosmic Bubble) --- */
+        :root[data-theme="dark"] {
+            --bg-global: radial-gradient(circle at 50% 50%, #1e1b4b 0%, #090514 100%);
+            --bg-card: #151226;
+            --bg-inner-card: #221c3d;
+            --bg-tag: rgba(255, 255, 255, 0.08);
+            --border-color: #312e81;
+            --text-primary: #ffffff;
+            --text-secondary: #c7d2fe;
+            --text-muted: #818cf8;
+            --btn-bg: #818cf8;
+            --btn-text: #090514;
+            --card-shadow: 8px 8px 0px #090514;
+            --bubble-shadow: inset -4px -4px 0px rgba(0,0,0,0.2);
+        }
+
+        :root[data-theme="light"] {
+            --bg-global: radial-gradient(circle at 50% 50%, #e0e7ff 0%, #c7d2fe 100%);
+            --bg-card: #ffffff;
+            --bg-inner-card: #f3f4f6;
+            --bg-tag: rgba(0, 0, 0, 0.05);
+            --border-color: #1e1b4b;
+            --text-primary: #1e1b4b;
+            --text-secondary: #4338ca;
+            --text-muted: #6366f1;
+            --btn-bg: #ff763d;
+            --btn-text: #ffffff;
+            --card-shadow: 6px 6px 0px #1e1b4b;
+            --bubble-shadow: inset -4px -4px 0px rgba(0,0,0,0.15);
+        }
+
+        /* --- Reset & Base --- */
+        * { 
+            box-sizing: border-box; 
+            margin: 0; 
+            padding: 0; 
+            transition: transform 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.3s, border-color 0.3s;
+            font-family: 'Fredoka', sans-serif;
+        }
+        
+        body { 
+            background: var(--bg-global); 
+            color: var(--text-primary); 
+            min-height: 100vh; 
+            padding: 2rem 1rem; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+        }
+
+        /* --- Main Container --- */
+        .app-container { 
+            width: 100%; 
+            max-width: 900px; 
+            background: var(--bg-card); 
+            border: 4px solid var(--border-color); 
+            border-radius: 40px; 
+            padding: 3rem 2.5rem; 
+            box-shadow: var(--card-shadow); 
+            display: grid; 
+            grid-template-columns: 1fr 1.1fr; 
+            gap: 2.5rem; 
+            position: relative; 
+        }
+
+        .theme-toggle { 
+            position: absolute; 
+            top: -20px; 
+            right: 30px; 
+            background: var(--btn-bg); 
+            border: 3px solid var(--border-color); 
+            padding: 10px 20px; 
+            border-radius: 50px; 
+            color: var(--btn-text); 
+            font-size: 14px; 
+            font-weight: 700; 
+            cursor: pointer; 
+            box-shadow: 4px 4px 0px var(--border-color);
+        }
+        .theme-toggle:active { transform: translateY(4px) translateX(4px); box-shadow: 0px 0px 0px var(--border-color); }
+
+        /* --- Kolom Kiri --- */
+        .input-side { display: flex; flex-direction: column; justify-content: center; }
+        .brand { display: flex; align-items: center; gap: 12px; margin-bottom: 0.75rem; }
+        .brand-icon { font-size: 40px; animation: bounce 2.5s infinite alternate; }
+        
+        h1 { font-size: 32px; font-weight: 700; color: var(--text-primary); line-height: 1.2; }
+        .sub-title { font-size: 15px; color: var(--text-secondary); margin-bottom: 2rem; font-weight: 400; }
+
+        .form-group { margin-bottom: 1.5rem; display: flex; flex-direction: column; gap: 10px; }
+        label { font-size: 14px; font-weight: 600; color: var(--text-muted); padding-left: 5px; }
+        
+        .input-wrapper { display: flex; gap: 12px; }
+        
+        select, input { 
+            flex: 1; 
+            height: 54px; 
+            background: var(--bg-inner-card); 
+            border: 3px solid var(--border-color); 
+            border-radius: 20px; 
+            padding: 0 20px; 
+            color: var(--text-primary); 
+            font-size: 16px; 
+            font-weight: 600; 
+            outline: none; 
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+        }
+        input::placeholder { color: var(--text-muted); opacity: 0.6; }
+        select:focus, input:focus { transform: scale(1.02); background: var(--bg-card); }
+        select option { background-color: var(--bg-card); color: var(--text-primary); }
+
+        .btn-submit { 
+            width: 100%; 
+            height: 56px; 
+            background: var(--btn-bg); 
+            color: var(--btn-text); 
+            border: 3px solid var(--border-color); 
+            border-radius: 25px; 
+            font-size: 18px; 
+            font-weight: 700; 
+            cursor: pointer; 
+            margin-top: 1rem; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            gap: 8px; 
+            box-shadow: var(--bubble-shadow), 4px 4px 0px var(--border-color);
+        }
+        .btn-submit:hover { transform: scale(1.03); }
+        .btn-submit:active { transform: translateY(4px) translateX(4px); box-shadow: 0px 0px 0px var(--border-color); }
+
+        /* --- Kolom Kanan --- */
+        .result-side { 
+            background: var(--bg-inner-card); 
+            border: 3px dashed var(--border-color); 
+            border-radius: 30px; 
+            padding: 2rem;
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            min-height: 450px; 
+        }
+        .placeholder-view { text-align: center; color: var(--text-muted); }
+        .placeholder-view .icon { font-size: 55px; margin-bottom: 10px; animation: float 3s ease-in-out infinite; }
+        .placeholder-view p { font-size: 15px; font-weight: 500; max-width: 250px; line-height: 1.4; }
+
+        /* --- Kartu Zodiak Utama --- */
+        .zodiac-card { width: 100%; animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        
+        .zodiac-header { 
+            display: flex; 
+            align-items: center; 
+            justify-content: space-between; 
+            margin-bottom: 1.25rem; 
+            background: var(--bg-card);
+            border: 3px solid var(--border-color); 
+            padding: 1.2rem; 
+            border-radius: 24px; 
+            box-shadow: 4px 4px 0px var(--border-color);
+        }
+        .meta-left { display: flex; align-items: center; gap: 15px; }
+        .zodiac-symbol { 
+            font-size: 50px; 
+            width: 70px; 
+            height: 70px; 
+            background: var(--bg-inner-card);
+            border: 3px solid var(--border-color);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--bubble-shadow);
+        }
+        .zodiac-name { font-size: 26px; font-weight: 700; color: var(--text-primary); }
+        .zodiac-range { font-size: 13px; color: var(--text-muted); font-weight: 500; }
+        
+        .element-badge { 
+            display: inline-block; 
+            font-size: 11px; 
+            font-weight: 700; 
+            padding: 4px 12px; 
+            border-radius: 50px; 
+            margin-top: 6px;
+            border: 2px solid var(--border-color);
+            box-shadow: var(--bubble-shadow);
+        }
+
+        .compatibility-box { text-align: center; background: var(--bg-inner-card); padding: 8px 12px; border-radius: 16px; border: 2px solid var(--border-color); }
+        .comp-val { font-size: 24px; font-weight: 800; color: var(--btn-bg); }
+        .comp-lbl { font-size: 11px; color: var(--text-muted); font-weight: 600; }
+
+        /* Grid Atribut */
+        .attr-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; margin-bottom: 1.25rem; }
+        .attr-block { 
+            background: var(--bg-card); 
+            border: 3px solid var(--border-color); 
+            border-radius: 20px; 
+            padding: 10px; 
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 3px 3px 0px var(--border-color);
+        }
+        .attr-icon { font-size: 24px; }
+        .attr-info { display: flex; flex-direction: column; }
+        .attr-label { font-size: 11px; color: var(--text-muted); font-weight: 600; }
+        .attr-value { font-size: 13px; color: var(--text-primary); font-weight: 700; }
+
+        /* Sifat Tags */
+        .section-title { font-size: 13px; font-weight: 700; color: var(--text-muted); margin-bottom: 8px; display: flex; align-items: center; gap: 6px; }
+        .sifat-flex { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.25rem; }
+        .sifat-tag { 
+            font-size: 13px; 
+            font-weight: 600; 
+            padding: 6px 14px; 
+            border-radius: 50px; 
+            background: var(--bg-card); 
+            border: 2px solid var(--border-color); 
+            color: var(--text-primary); 
+            box-shadow: var(--bubble-shadow);
+        }
+
+        /* --- NEW: Bubble untuk Rekomendasi Karier --- */
+        .career-box {
+            background: var(--bg-card);
+            border: 3px solid var(--border-color);
+            padding: 1rem;
+            border-radius: 24px;
+            box-shadow: 4px 4px 0px var(--border-color);
+            margin-bottom: 1.25rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .career-icon { font-size: 32px; background: var(--bg-inner-card); padding: 8px; border-radius: 16px; border: 2px solid var(--border-color); }
+        .career-text-wrapper { display: flex; flex-direction: column; }
+        .career-title { font-size: 15px; font-weight: 700; color: var(--text-primary); }
+        .career-desc { font-size: 12px; color: var(--text-secondary); margin-top: 2px; font-weight: 500; }
+
+        /* Deskripsi Karakter */
+        .character-box { 
+            background: var(--bg-card); 
+            border: 3px solid var(--border-color); 
+            padding: 1.2rem; 
+            border-radius: 24px; 
+            box-shadow: 4px 4px 0px var(--border-color);
+        }
+        .desc-text { font-size: 14px; color: var(--text-secondary); line-height: 1.6; font-weight: 500; }
+
+        /* --- Animations --- */
+        @keyframes float { 0%, 100% { transform: translateY(0) rotate(0deg); } 50% { transform: translateY(-10px) rotate(5deg); } }
+        @keyframes bounce { 0% { transform: scale(1); } 100% { transform: scale(1.1) rotate(-3deg); } }
+        @keyframes popIn { from { opacity: 0; transform: scale(0.8); } to { opacity: 1; transform: scale(1); } }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .app-container { grid-template-columns: 1fr; gap: 2rem; padding: 2rem 1.5rem; margin-top: 1.5rem; }
+            body { padding: 1rem; }
+            .theme-toggle { top: -15px; right: 20px; }
+        }
+    </style>
 </head>
 <body>
 
 <div class="app-container">
     <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙 Gelap</button>
 
+    <!-- Kolom Kiri -->
     <div class="input-side">
         <div class="brand">
             <span class="brand-icon">🔮</span>
             <h1>Cosmic Check.</h1>
         </div>
-        <p class="sub-title">Cek seberapa 'lu banget' zodiak lo dengan ramalan bintang kosmis yang anti garing!</p>
+        <p class="sub-title">Cek seberapa 'kamu banget' zodiakmu dengan ramalan kosmis yang anti-boring!</p>
         
         <div class="form-group">
             <label>Panggilan Lu Siapa?</label>
@@ -37,6 +302,7 @@
         <button class="btn-submit" onclick="generateZodiac()">✨ Spill Kepribadian Gue!</button>
     </div>
 
+    <!-- Kolom Kanan -->
     <div class="result-side" id="resultContainer">
         <div class="placeholder-view">
             <div class="icon">🛸</div>
@@ -45,6 +311,175 @@
     </div>
 </div>
 
-<script src="script.js"></script>
+<script>
+// --- Inisialisasi Dropdown Hari & Bulan ---
+const daySelect = document.getElementById('day');
+const monthSelect = document.getElementById('month');
+const months = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+
+for (let d = 1; d <= 31; d++) daySelect.innerHTML += `<option value="${d}">${d}</option>`;
+months.forEach((m, i) => monthSelect.innerHTML += `<option value="${i+1}">${m}</option>`);
+
+// --- Database Zodiak + Data Karir Masa Kini ---
+const zodiaks = [
+  { name:'Aries', symbol:'♈', range:'21 Mar – 19 Apr', element:'Api', color:'#ffeedb', bg:'#ff763d', planet:'Mars', lucky:'Merah Cabe', icon:'🔥', 
+    sifat:['Gaspol','Bossy','Setia Kawan','Ambisius'], 
+    career: 'Founder Startup, Project Manager, / Professional Athlete',
+    desc:'Lu itu definisi manusia berenergi nuklir. Nggak suka basa-basi, kalau mau sesuatu harus dapet SEKARANG. Pemimpin alami tapi kadang sumbunya agak pendek ya, senggol bacok!' },
+  
+  { name:'Taurus', symbol:'♉', range:'20 Apr – 20 Mei', element:'Tanah', color:'#eafaf1', bg:'#22c55e', planet:'Venus', lucky:'Hijau Matcha', icon:'🌱', 
+    sifat:['Kaum Rebahan','Loyal Pol','Seleranya Elit','Keras Kepala'], 
+    career: 'Financial Planner, Food Vlogger, / Luxury Brand Manager',
+    desc:'Kesenangan hidup lu sederhana: makan enak, tidur nyenyak, dan saldo rekening aman. Lu tipe pacar atau sahabat idaman karena setia mampus, tapi kalau udah ngambek... beuh susah luluh!' },
+  
+  { name:'Gemini', symbol:'♊', range:'21 Mei – 20 Jun', element:'Udara', color:'#fefce8', bg:'#eab308', planet:'Merkurius', lucky:'Kuning Lemon', icon:'💨', 
+    sifat:['Social Butterfly','Overthinker','Asik Pol','Bunglon'], 
+    career: 'PR Specialist, Content Creator, / Live Streamer',
+    desc:'Katanya berkepribadian ganda, padahal lu cuma punya banyak mode aja! Lu seru banget diajak deep talk ataupun ngegosip. Otak lu cepet dapet info baru, tapi cepet bosenan juga.' },
+  
+  { name:'Cancer', symbol:'♋', range:'21 Jun – 22 Jul', element:'Air', color:'#f0fdfa', bg:'#14b8a6', planet:'Bulan', lucky:'Perak Estetik', icon:'💧', 
+    sifat:['Perasa (Sefruit Sadboy)','Intuisi Kuat','Homebody','Protektif'], 
+    career: 'Psychologist, HRD, / Interior Designer (WFH Enthusiast)',
+    desc:'Hati lu selembut tisu dibagi dua. Empati lu tinggi banget, suka jagain temen-temen lu layaknya seorang ibu. Tapi hati-hati, kalau lo udah masuk ke mode *shell mode*, semua orang lo cuekin.' },
+  
+  { name:'Leo', symbol:'👑', range:'23 Jul – 22 Ags', element:'Api', color:'#fff7ed', bg:'#f97316', planet:'Matahari', lucky:'Emas Berkilau', icon:'🦁', 
+    sifat:['Main Character','Pede Pol','Royal','Drama dikit'], 
+    career: 'Creative Director, Event Organizer, / Influencer / Actor',
+    desc:'Lu lahir dengan aura *Main Character*. Suka jadi pusat perhatian, berhati emas, dan royal banget sama orang terdekat. Agak gengsian dikit sih, tapi aslinya lu penyayang banget.' },
+  
+  { name:'Virgo', symbol:'♍', range:'23 Ags – 22 Sep', element:'Tanah', color:'#fafafa', bg:'#64748b', planet:'Merkurius', lucky:'Cokelat Pastel', icon:'⚙️', 
+    sifat:['Perfeksionis','Over-analyzer','Rapi Efisien','Mandiri'], 
+    career: 'Data Analyst, Editor, / Quality Assurance (QA)',
+    desc:'Nggak ada detail yang lolos dari mata lu. Semua harus sesuai rencana dan rapi. Lu sering jadi tempat curhat karena solusi lo realistis banget, walaupun kadang kritikan lo agak pedes.' },
+  
+  { name:'Libra', symbol:'♎', range:'23 Sep – 22 Okt', element:'Udara', color:'#fdf2f8', bg:'#ec4899', planet:'Venus', lucky:'Pink Pastel', icon:'⚖️', 
+    sifat:['Plinplan','Peace Maker','Modis','Aesthetic Finder'], 
+    career: 'Fashion Stylist, Lawyer/Mediator, / Beauty Influencer',
+    desc:'Lu adalah pemburu estetika sejati. Paling anti konflik dan suka kedamaian. Tapi kalau disuruh milih tempat makan? Bisa berjam-jam karena timbangan lu nggak pernah seimbang!' },
+  
+  { name:'Scorpio', symbol:'🦂', range:'23 Okt – 21 Nov', element:'Air', color:'#fae8ff', bg:'#a855f7', planet:'Pluto', lucky:'Hitam Misterius', icon:'🔮', 
+    sifat:['Misterius','Detektif','Setia Mati-matian','Intens'], 
+    career: 'Investigator, Cyber Security, / Trader / Financial Analyst',
+    desc:'Aura lu misterius bikin orang penasaran. Insting detektif lu kuat banget, jangan harap ada yang bisa bohongin lu. Sekali dikhianati kelar udah, tapi kalau lu udah sayang, bakal dijagain mati-matian.' },
+  
+  { name:'Sagitarius', symbol:'🏹', range:'22 Nov – 21 Des', element:'Api', color:'#e0f2fe', bg:'#0284c7', planet:'Jupiter', lucky:'Biru Elektrik', icon:'🌌', 
+    sifat:['Jiwa Bebas','Pelawak','Jujur Kebablasan','Petualang'], 
+    career: 'Travel Blogger, Stand-up Comedian, / Tour Guide Specialist',
+    desc:'Lu adalah definisi manusia bebas tanpa beban. Selalu optimis, suka jalan-jalan, dan hobi ngelawak. Kadang kalau ngomong suka jujur kebablasan sampai bikin orang tersedak, tapi aslinya gak bermaksud jahat kok.' },
+  
+  { name:'Capricorn', symbol:'♑', range:'22 Des – 19 Jan', element:'Tanah', color:'#f1f5f9', bg:'#475569', planet:'Saturnus', lucky:'Abu-abu Minimalis', icon:'⛰️', 
+    sifat:['Hustle Culture','Dewasa','Disiplin','Skeptis'], 
+    career: 'Investment Banker, CEO / Co-Founder, / Business Strategist',
+    desc:'Anak magang teladan atau calon CEO ya lu ini. Otak lu isinya cuan, karier, dan masa depan. Kelihatan kaku dan dingin di luar, padahal aslinya lu cuma lagi capek mikirin masa depan aja.' },
+  
+  { name:'Aquarius', symbol:'♒', range:'20 Jan – 18 Feb', element:'Udara', color:'#ecfeff', bg:'#06b6d4', planet:'Uranus', lucky:'Neon Teal', icon:'⚡', 
+    sifat:['Unik/Aneh','Visioner','Gak Suka Ikut-ikutan','Savage'], 
+    career: 'UI/UX Designer, Tech Developer, / Trend Forecaster',
+    desc:'Lu sering dibilang dateng dari planet lain karena jalan pikiran lo yang unik banget. Lu gak suka ikut-ikutan tren, mandiri, dan visioner. Singkatnya: lu adalah definisi *indie* sejati.' },
+  
+  { name:'Pisces', symbol:'🌊', range:'19 Feb – 20 Mar', element:'Air', color:'#e0e7ff', bg:'#4f46e5', planet:'Neptunus', lucky:'Ungu Lavender', icon:'🎨', 
+    sifat:['Pemimpi','Kreatif Sastra','Baperan','Indra Keenam'], 
+    career: 'Musician / Songwriter, Illustrator, / Photographer',
+    desc:'Lu hidup di dunia mimpi yang penuh imajinasi. Kreatif banget, berjiwa seni, dan sensitif sama perasaan orang lain. Kadang suka kabur dari kenyataan ke dunia fantasi buatan lo sendiri.' }
+];
+
+function getZodiak(d, m) {
+  if ((m===1&&d>=20)||(m===2&&d<=18)) return zodiaks[10];
+  if ((m===2&&d>=19)||(m===3&&d<=20)) return zodiaks[11];
+  if ((m===3&&d>=21)||(m===4&&d<=19)) return zodiaks[0];
+  if ((m===4&&d>=20)||(m===5&&d<=20)) return zodiaks[1];
+  if ((m===5&&d>=21)||(m===6&&d<=20)) return zodiaks[2];
+  if ((m===6&&d>=21)||(m===7&&d<=22)) return zodiaks[3];
+  if ((m===7&&d>=23)||(m===8&&d<=22)) return zodiaks[4];
+  if ((m===8&&d>=23)||(m===9&&d<=22)) return zodiaks[5];
+  if ((m===9&&d>=23)||(m===10&&d<=22)) return zodiaks[6];
+  if ((m===10&&d>=23)||(m===11&&d<=21)) return zodiaks[7];
+  if ((m===11&&d>=22)||(m===12&&d<=21)) return zodiaks[8];
+  return zodiaks[9];
+}
+
+function generateZodiac() {
+  const d = parseInt(daySelect.value);
+  const m = parseInt(monthSelect.value);
+  const nameInput = document.getElementById('username').value.trim();
+  const z = getZodiak(d, m);
+  
+  const rateSeed = (nameInput.length + d + m) * 9;
+  const compatibilityRate = 75 + (rateSeed % 22); 
+
+  const sapaan = nameInput ? `Yo <strong>${nameInput}</strong>, ` : 'Gais, ';
+
+  const resContainer = document.getElementById('resultContainer');
+  resContainer.style.borderStyle = "solid";
+  resContainer.innerHTML = `
+    <div class="zodiac-card">
+      <div class="zodiac-header">
+        <div class="meta-left">
+          <div class="zodiac-symbol" style="background: ${z.bg}; color: ${z.color}">${z.symbol}</div>
+          <div>
+            <div class="zodiac-name">${z.name}</div>
+            <div class="zodiac-range">${z.range}</div>
+            <span class="element-badge" style="background:${z.bg}; color:${z.color}">${z.icon} ${z.element}</span>
+          </div>
+        </div>
+        <div class="compatibility-box">
+          <div class="comp-val">${compatibilityRate}%</div>
+          <div class="comp-lbl">Vibe Match</div>
+        </div>
+      </div>
+
+      <div class="attr-grid">
+        <div class="attr-block">
+          <span class="attr-icon">🪐</span>
+          <div class="attr-info">
+            <span class="attr-label">Planet Guard</span>
+            <span class="attr-value">${z.planet}</span>
+          </div>
+        </div>
+        <div class="attr-block">
+          <span class="attr-icon">🎨</span>
+          <div class="attr-info">
+            <span class="attr-label">Warna Hoki</span>
+            <span class="attr-value">${z.lucky}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="section-title">✨ Kepribadian Lo Banget:</div>
+      <div class="sifat-flex">
+        ${z.sifat.map(s => `<span class="sifat-tag">${s}</span>`).join('')}
+      </div>
+
+      <!-- TEMPAT REKOMENDASI KARIER BARU -->
+      <div class="section-title">💼 Cari Cuan Vibes:</div>
+      <div class="career-box">
+        <span class="career-icon">🚀</span>
+        <div class="career-text-wrapper">
+          <span class="career-title">${z.career}</span>
+          <span class="career-desc">Karier di atas cocok banget sama energi rasi bintang lo!</span>
+        </div>
+      </div>
+
+      <div class="section-title">📜 Spill Realita:</div>
+      <div class="character-box">
+        <p class="desc-text">${sapaan}${z.desc}</p>
+      </div>
+    </div>
+  `;
+}
+
+function toggleTheme() {
+    const html = document.documentElement;
+    const btn = document.getElementById('themeBtn');
+    if(html.getAttribute('data-theme') === 'dark') {
+        html.setAttribute('data-theme', 'light');
+        btn.innerHTML = '☀️ Terang';
+    } else {
+        html.setAttribute('data-theme', 'dark');
+        btn.innerHTML = '🌙 Gelap';
+    }
+}
+</script>
+
 </body>
 </html>
